@@ -11,9 +11,10 @@ class Auth0Middleware(object):
         self.get_response = get_response
 
     def __call__(self, request):
-        # GET TOKEN
+        # IF URL CONTAINS api
+        # if (request.path).split('/')[1] == 'api':
+            # GET TOKEN
         auth = request.META.get('HTTP_AUTHORIZATION')
-        print auth
         if not auth:
             return JsonResponse(data={"code": "authorization_header_missing",
                                       "description":
@@ -78,5 +79,6 @@ class Auth0Middleware(object):
         else:
             return JsonResponse(data={"code": "invalid_header",
                                       "description": "Unable to find appropriate key"}, status=401)
+
         response = self.get_response(request)
         return response
