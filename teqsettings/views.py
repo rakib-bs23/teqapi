@@ -4,14 +4,14 @@ from __future__ import unicode_literals
 import requests
 from django.shortcuts import render
 from rest_framework import viewsets
-from teqsettings.serializers import ItemsSerializer
 
 from models import ObItem
+from teqsettings.serializers import ItemsSerializer
 
 
 class ItemsViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that gives items list.
     """
     queryset = ObItem.objects.all()
     serializer_class = ItemsSerializer
@@ -20,25 +20,11 @@ class ItemsViewSet(viewsets.ModelViewSet):
 # Create your views here.
 def home(request):
     # Make request
-    # url = 'https://rakibul.auth0.com/api/v2/'
-    # headers = {'User-Agent': 'github.com/vitorfs/seot'}
-    # params = {
-    #     'order': 'desc',
-    #     'sort': 'votes',
-    #     'site': 'stackoverflow',
-    #     'pagesize': 3,
-    #     'tagged': 'python;django',
-    # }
-    # r = requests.get(url, params=params, headers=headers)
-    # print r
+    # url = 'http://127.0.0.1:8000/'
+    # headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlJEVXlOMFl5TjBFeFJqWXhRa015TUVaQ056QkJSVE01UVRJMk56aEZPVFEyTXpsRk1VSkRPUSJ9.eyJpc3MiOiJodHRwczovL3RlcS5hdXRoMC5jb20vIiwic3ViIjoiZ20yWjRFNWlaU24xOVhGMHhWbnkxMUxwbzBCcWhsTUtAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vdGVxLmF1dGgwLmNvbS9hcGkvdjIvIiwiaWF0IjoxNTA2Njc5NjkwLCJleHAiOjE1MDY3NjYwOTAsImF6cCI6ImdtMlo0RTVpWlNuMTlYRjB4Vm55MTFMcG8wQnFobE1LIiwic2NvcGUiOiJyZWFkOmNsaWVudF9ncmFudHMgY3JlYXRlOmNsaWVudF9ncmFudHMgZGVsZXRlOmNsaWVudF9ncmFudHMgdXBkYXRlOmNsaWVudF9ncmFudHMgcmVhZDp1c2VycyB1cGRhdGU6dXNlcnMgZGVsZXRlOnVzZXJzIGNyZWF0ZTp1c2VycyByZWFkOnVzZXJzX2FwcF9tZXRhZGF0YSB1cGRhdGU6dXNlcnNfYXBwX21ldGFkYXRhIGRlbGV0ZTp1c2Vyc19hcHBfbWV0YWRhdGEgY3JlYXRlOnVzZXJzX2FwcF9tZXRhZGF0YSBjcmVhdGU6dXNlcl90aWNrZXRzIHJlYWQ6Y2xpZW50cyB1cGRhdGU6Y2xpZW50cyBkZWxldGU6Y2xpZW50cyBjcmVhdGU6Y2xpZW50cyByZWFkOmNsaWVudF9rZXlzIHVwZGF0ZTpjbGllbnRfa2V5cyBkZWxldGU6Y2xpZW50X2tleXMgY3JlYXRlOmNsaWVudF9rZXlzIHJlYWQ6Y29ubmVjdGlvbnMgdXBkYXRlOmNvbm5lY3Rpb25zIGRlbGV0ZTpjb25uZWN0aW9ucyBjcmVhdGU6Y29ubmVjdGlvbnMgcmVhZDpyZXNvdXJjZV9zZXJ2ZXJzIHVwZGF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGRlbGV0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGNyZWF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIHJlYWQ6ZGV2aWNlX2NyZWRlbnRpYWxzIHVwZGF0ZTpkZXZpY2VfY3JlZGVudGlhbHMgZGVsZXRlOmRldmljZV9jcmVkZW50aWFscyBjcmVhdGU6ZGV2aWNlX2NyZWRlbnRpYWxzIHJlYWQ6cnVsZXMgdXBkYXRlOnJ1bGVzIGRlbGV0ZTpydWxlcyBjcmVhdGU6cnVsZXMgcmVhZDplbWFpbF9wcm92aWRlciB1cGRhdGU6ZW1haWxfcHJvdmlkZXIgZGVsZXRlOmVtYWlsX3Byb3ZpZGVyIGNyZWF0ZTplbWFpbF9wcm92aWRlciBibGFja2xpc3Q6dG9rZW5zIHJlYWQ6c3RhdHMgcmVhZDp0ZW5hbnRfc2V0dGluZ3MgdXBkYXRlOnRlbmFudF9zZXR0aW5ncyByZWFkOmxvZ3MgcmVhZDpzaGllbGRzIGNyZWF0ZTpzaGllbGRzIGRlbGV0ZTpzaGllbGRzIHVwZGF0ZTp0cmlnZ2VycyByZWFkOnRyaWdnZXJzIHJlYWQ6Z3JhbnRzIGRlbGV0ZTpncmFudHMgcmVhZDpndWFyZGlhbl9mYWN0b3JzIHVwZGF0ZTpndWFyZGlhbl9mYWN0b3JzIHJlYWQ6Z3VhcmRpYW5fZW5yb2xsbWVudHMgZGVsZXRlOmd1YXJkaWFuX2Vucm9sbG1lbnRzIGNyZWF0ZTpndWFyZGlhbl9lbnJvbGxtZW50X3RpY2tldHMgcmVhZDp1c2VyX2lkcF90b2tlbnMgY3JlYXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IgZGVsZXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.Lp67O8R4Tt1v0l12ZoeldqIFALVNnciEv-f_OBAT2CYeP_rLK9_cYVNr0kiEzgojZWAGosPG_fBeOmIMcgucg1n3wYsXwqtHtzUfVubIxCsI4SqGH6UaSWHIDbj0J2AKwOJ2Fzec3ngmZdkrIBKNYhFgTCdva0crtj2FwsdC49C3jy7ZMF-jWrEfqd1nYiQsjCrecUtGX23MRNplTD_DGm5yLEL47S4fUj_1BQzaEgfM3E5kRufVeX3lDLxDnd9GfVIQBW-eq89fS7nu2SDFlKeJ0koVDuiI_1TLha66SFSXTcKc1-G-pmd-MwF37uuA3Nu5E0XLEeCc2pkmOH9fCQ'}
+    # r = requests.get(url, headers=headers)
+    # print r.content
 
-
-
-    # conn = http.client.HTTPSConnection("")
-    payload = "{\"grant_type\":\"client_credentials\",\"client_id\": \"dUkyKj24VlpLhh3DQH9rIwjQlDZlt1J_\",\"client_secret\": \"PsGRf-GAObyxpUIlAlVbQ0KXWkyQES-mcV_n3JNCjCyfgNFOsFEPx4GuoEQuy34o\",\"audience\": \"https://rakibul.auth0.com/api/v2/\"}"
-    headers = {'content-type': "application/json"}
-    r = requests.get("https://rakibul.auth0.com/oauth/token", params=payload, headers=headers)
-    print(r)
 
     item_list = ObItem.objects.all()
     context = {'item_list': item_list}
